@@ -1,0 +1,18 @@
+﻿@model HomePageViewModel
+@section header{
+    @await Html.PartialAsync("header")
+}
+
+@section script {
+    <script src="~/js/Script.js"></script>
+}
+    <h1>Film listesi</h1>
+<div id="Filmler" style="display: flex; flex-wrap: wrap;">
+        @foreach(var movie in Model.PopularMovies)
+    {
+        @await Html.PartialAsync("_movie", movie)
+
+    }
+</div>
+
+

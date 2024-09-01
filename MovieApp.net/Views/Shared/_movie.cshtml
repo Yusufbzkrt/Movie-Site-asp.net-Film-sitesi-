@@ -1,0 +1,13 @@
+﻿<div style="flex: 1 1 25%; padding: 10px; box-sizing: border-box; border:4px ridge   #eee7e7;  border-radius: 20px; display: flex; flex-direction: column;">
+    <div style="display: flex; justify-content: center; align-items: center;">
+    <img src="/img/@Model.ImageUrl" class="card-img" alt="@Model.Title" style="border-radius: 20px 20px 0 0; width: 75%; height: auto;">
+    </div>
+    <div class="card-body" style="flex: 1;">
+        <h5 class="card-title">@Model.Title</h5>
+    </div>
+    <div style="margin-top: auto;">
+        <a class="btn btn-danger" asp-controller="Movies" asp-action="Details" asp-route-id="@Model.MovieId">Details</a>
+    </div>
+</div>
+
+

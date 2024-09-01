@@ -1,0 +1,66 @@
+﻿@model AdminEditMovieViewModel
+
+<h1>Edit Movie</h1>
+<hr />
+<form method="post" asp-controller="Admin" asp-action="MovieUpdate" enctype="multipart/form-data">
+	<div class="row">
+		<div class="col-md-8">
+			<input type="hidden" name="MovieId" value="@Model.MovieId" />
+			<div class="mb-3">
+				<label asp-for="Title"></label>
+				<input asp-for="Title" class="form-control" value="@Model.Title" />
+				<span asp-validation-for="Title" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Description"></label>
+				<textarea asp-for="Description" name="Description" id="Description" class="form-control" value="@Model.Description"></textarea>
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+			<div class="upload-container">
+				<input type="file" name="file" class="form-control" />
+			</div>
+			<div class="mb-3">
+				<input type="hidden" name="ImageUrl" value="@Model.Imageurl"
+				<input type="file" name="file" class="form-control" />
+
+			</div>
+			<button type="submit" class="btn btn-primary">Gönder</button>
+
+		</div>
+		<div class="col-md-4">
+
+			@foreach (var item in (List<Genre>)ViewBag.Genres)
+			{
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" name="genreIds" value="@item.GenreId" id="genre_@(item.GenreId)" @(Model.GenreIds!=null?Model.GenreIds.Any(i => i == item.GenreId) ? "checked" : "":"")>
+					<label class="form-check-label" for="genre_@(item.GenreId)">
+						@item.Name
+					</label>
+				</div>
+			}
+			<span asp-validation-for="GenreIds" class="text-danger"></span>@*asp-validation-for="GenreIds" hangi property ile ilişkilendirmek istiyorsak onu yazıyoruz*@
+
+			<div class="mt-3"> 
+				<img src="/img/@Model.Imageurl" width="150px" />
+			</div>
+		</div>
+	</div>
+</form>
+@section script
+{
+	<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+	<script>
+		CKEDITOR.replace('Description');
+	</script>
+}
+
+
+@*<input class="form-check-input" type="checkbox" value="" id="genre_@(item.GenreId)" @(Model.SelectedGenres.Any(i=>i.GenreId == item.GenreId)? "checked": "")>
+burdaki yazdığımız kod bloğunda any fonksiyonunu kullandık bu metodun görevi, bir koleksiyonun herhangi bir öğesinin belirli bir koşulu sağlayıp sağlamadığını kontrol etmektir.
+bu kodda eğer sağlarsa checked deyimini kod bloğuna ekler.
+*@
+
+@*form içinde bir resim veya dosya yükleyeceksek bunu forma
+		bildirmemiz gerekiyor bunun için;
+		 enctype="multipart/form-data" bir kod bloğu ekledik
+	*@
