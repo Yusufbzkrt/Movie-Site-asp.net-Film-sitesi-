@@ -23,12 +23,9 @@ namespace MovieApp.Web.Controllers
             return View();
         }
 
-		//localhost:9666/movies/list/
-		//localhost:9666/movies/list/id
 		[HttpGet]
 		public IActionResult List(int? id,string q)
         {
-            //var movies = MovieRepository.Movies;
             var movies = _context.Movies.AsQueryable();
 
             if (id != null)
@@ -45,7 +42,7 @@ namespace MovieApp.Web.Controllers
             }
             var model = new MoviesViewModel()
             {
-                Movies = movies.ToList()//burası önceden Movies = MovieRepository.Movies; idi fakat filtrelenmiş bilgiyi veya filtrelenmemiş bilgiyi ekrana vermek için buna çevirdik.
+                Movies = movies.ToList()
             };
             return View("Movies", model);
         }

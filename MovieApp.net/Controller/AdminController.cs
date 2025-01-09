@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieApp.net.Data;
 using MovieApp.net.Entity;
+using MovieApp.net.Migrations;
 using MovieApp.net.Models;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace MovieApp.net.Controllers
 		}
 
 		[HttpPost]//aşağıda asenkron bir metot olarak tanımladığımız için fonk başına async getirdik ve task içine aldık.
-		public async Task<IActionResult> MovieUpdate(AdminEditMovieViewModel model, int[] genreIds, IFormFile file) //Iformfile deymini kullanmalı ve yanında movieupdate de kullandığımız name issmiyle aynısını girmeliyiz yani file
+		public async Task<IActionResult> MovieUpdate(AdminEditMovieViewModel model, int[] genreIds, IFormFile file, IFormFile trailerFile) //Iformfile deymini kullanmalı ve yanında movieupdate de kullandığımız name issmiyle aynısını girmeliyiz yani file
 		{
 			if (ModelState.IsValid)
 			{
@@ -69,8 +70,20 @@ namespace MovieApp.net.Controllers
 						await file.CopyToAsync(stream);
 					}
 				}
+				if (trailerFile != null)
+				{
+					var trailerExtension = Path.GetExtension(trailerFile.FileName);
+					var trailerFileName = string.Format($"{Guid.NewGuid()}{trailerExtension}");
+					var trailerPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Content\\Videos", trailerFileName);
+					entity.TrailerUrl = trailerFileName;
+
+					using (var stream = new FileStream(trailerPath, FileMode.Create))
+					{
+						await trailerFile.CopyToAsync(stream);
+					}
+				}
 				entity.Genres = genreIds.Select(id => _context.Genres.FirstOrDefault(i => i.GenreId == id)).ToList(); //Bu kod, belirli bir film (entity) için genreIds listesindeki ID'lerle ilişkili türleri (Genres) alır ve bu türleri entity.Genres listesine atar. Başka bir deyişle, bir film için seçilen türlerin listesini günceller.
-				_context.SaveChanges();
+				await _context.SaveChangesAsync();
 				return RedirectToAction("MovieList");
 			}
 			ViewBag.Genres = _context.Genres.ToList();
@@ -91,10 +104,7 @@ namespace MovieApp.net.Controllers
 					Imageurl = m.ImageUrl,
 					Genres = m.Genres.ToList()
 				})
-				.ToList()/*burda sistemi çalıştırdığımız zaman description kısmı 
-         falanda geliyordu fakat biz bu bbilgileri istemiyoruz 
-        bunun için bu kısmı özelleştirdik ve sadece istediğmiz
-        kısımların bilgilerini yazdık*/
+				.ToList()
 			});
 		}
 
@@ -199,21 +209,17 @@ namespace MovieApp.net.Controllers
 			return View(new AdminCreateMovieModel());//ilk get isteği gönderilip sistem ayağı kalkmaya çalıştığı için modeli belirtmeliyiz
 		}
 		[HttpPost]
-		public IActionResult MovieCreate(AdminCreateMovieModel model, int[] genreIds, IFormFile file)
+		public IActionResult MovieCreate(AdminCreateMovieModel model, int[] genreIds, IFormFile file, IFormFile Trailer)
 		{
-
-			//if (genreIds.Length==0) 
-			//{
-			//	ModelState.AddModelError("GenreIds","En az bir tür seçmelisiniz.");
-			//}
-
-			if (ModelState.IsValid)
-			{
+			
+				bool isClassic = model.IsClassic;
 				var entity = new Movie
 				{
 					Title = model.Title,
 					Description = model.Description,
-					ImageUrl = "no-image.png"
+					IsClassic = isClassic,
+					ImageUrl = "no-image.png",
+					TrailerUrl = null,			
 				};
 				if (file != null && file.Length > 0)
 				{
@@ -227,6 +233,18 @@ namespace MovieApp.net.Controllers
 
 					entity.ImageUrl = fileName; // Yüklenen dosyanın adı veritabanına kaydedilecek
 				}
+				if (Trailer != null && Trailer.Length > 0)
+				{
+					var trailerFileName = Path.GetFileName(Trailer.FileName);
+					var trailerFilePath = Path.Combine("wwwroot/Content/Videos", trailerFileName);
+
+					using (var stream = new FileStream(trailerFilePath, FileMode.Create))
+					{
+						Trailer.CopyTo(stream);
+					}
+
+					entity.TrailerUrl = $"/Content/Videos/{trailerFileName}"; // Fragmanın yolu veritabanına kaydedilecek
+				}
 				foreach (int id in genreIds)
 				{
 					entity.Genres.Add(_context.Genres.FirstOrDefault(i => i.GenreId == id));
@@ -234,10 +252,7 @@ namespace MovieApp.net.Controllers
 				_context.Movies.Add(entity);
 				_context.SaveChanges();
 				return RedirectToAction("MovieList", "Admin");//admin altındaki movielist
-			}
-			ViewBag.Genres = _context.Genres.ToList();
 
-			return View(model);
 		}
 	}
 

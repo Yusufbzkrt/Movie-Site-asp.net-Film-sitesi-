@@ -16,10 +16,6 @@ namespace MovieApp.net.Models
 		public string Title { get; set; }
 		public string Imageurl { get; set; }
 		public List<Genre> Genres { get; set; }
-		/*burda sistemi çalıştırdığımız zaman description kısmı 
-         falanda geliyordu fakat biz bu bbilgileri istemiyoruz 
-        bunun için bu kısmı özelleştirdik ve sadece istediğmiz
-        kısımların bilgilerini yazdık*/
 	}
 
 	public class AdminCreateMovieModel
@@ -55,6 +51,8 @@ namespace MovieApp.net.Models
 		[StringLength(3500, MinimumLength = 10, ErrorMessage = "Film açıklaması için 10-3500 karakter girilmelidir.")]
 		public string Description { get; set; }
 		public string Imageurl { get; set; }
+        public string TrailerUrl { get; set; }
+		public bool IsClassic { get; set; }
 		[Required(ErrorMessage = "En az bir tür seçmelisiniz")]
 		public int[] GenreIds { get; set; }
 	}

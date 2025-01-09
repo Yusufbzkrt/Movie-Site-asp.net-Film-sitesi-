@@ -17,8 +17,9 @@ namespace MovieApp.net.Data
                 new Genre {Name="Komedi"},
                 new Genre {Name="Romantik"},
                 new Genre {Name="Savaş"},
-                new Genre {Name="Bilim Kurgu"}
-           };//tür bilgisi
+                new Genre {Name="Bilim Kurgu"},
+				new Genre {Name="Korku"}
+		   };//tür bilgisi
             var movies = new List<Movie>()
             {
                 new Movie
@@ -30,7 +31,8 @@ namespace MovieApp.net.Data
                     "derin bağlarını keşfeder, bu da onu zor bir seçimle karşı karşıya bırakır: Kendi insanlarıyla mı yoksa yeni ailesiyle mi duracak? Film, görsel " +
                     "efektleri, yenilikçi 3D teknolojisi ve çevresel mesajlarıyla büyük beğeni topladı ve sinema tarihinde önemli bir yer edindi.",
                     ImageUrl = "Avatar.jpg",
-                    Genres =new List<Genre>(){ genres[0], new Genre() {Name="Yeni Tür"}, genres[1] }
+                    TrailerUrl="/Content/videos/Trailer.mp4",
+					Genres =new List<Genre>(){ genres[0], genres[3] }
                 },
                 new Movie
                 {
@@ -38,7 +40,8 @@ namespace MovieApp.net.Data
                     Description = "The Lord of the Rings\" (Yüzüklerin Efendisi), J.R.R. Tolkien'in aynı adlı kitabından uyarlanan epik bir fantastik film serisidir." +
                     "\r\n\t Film, Orta Dünya adı verilen hayali bir evrende geçer ve Güç Yüzüğü'nün yok edilmesi için verilen büyük mücadeleyi konu alır.",
                     ImageUrl ="lord_of_the_rings.jpg",
-                    Genres =new List<Genre>(){ genres[0], genres[2] }
+					TrailerUrl="/Content/videos/efendisi.mp4",
+					Genres =new List<Genre>(){ genres[0], genres[3] }
 
                 },
                 new Movie
@@ -49,31 +52,66 @@ namespace MovieApp.net.Data
                     "\r\n\t ve Kate Winslet tarafından canlandırılır) aşkını ve trajik sonlarını konu alır. Jack ve Rose'un karşılaşmaları ve aşkları, Titanic'in okyanusta \r\n\t " +
                     "batışıyla dramatik bir şekilde kesişir. Film, görsel efektleri, duygusal derinliği ve büyük bütçesiyle büyük beğeni topladı ve birçok ödül kazandı",
                     ImageUrl ="Titanic.jpg",
-                    Genres =new List<Genre>(){ genres[1], genres[3] }
+					TrailerUrl="/Content/videos/Titanic.mp4",
+					Genres =new List<Genre>(){ genres[0], genres[2] }
 
                 },
                 new Movie
                 {
-                    Title = "Film 4",
-                    Description = "açıklama 4",
-                    ImageUrl = "Avatar.jpg",
-                    Genres =new List<Genre>(){ genres[0], genres[1] }
+                    Title = "Gayribeyefendi Savaş Dairesi",
+					Description = "Guy Ritchie'nin rejisör koltuğuna kurulduğu son filmi \"The Ministry of Ungentlemanly Warfare\", yönetmenin tarzını kısmen yansıtan ve" +
+                    " bolca aksiyon vadeden tempolu bir sinema filmi olarak geçtiğimiz Nisan ayında, başta ABD olmak üzere yurt dışında gösterime girdi. 60 milyon dolarlık bütçesine" +
+                    " rağmen dünya çapında 27 milyon dolar gibi bir gişe hasılatı elde eden yapım, ülkemizdeki vizyonu es geçerek, Temmuz 2024 itibariyle Amazon Prime Video platformu üzerinden" +
+                    " internet seyircisi ile buluştu. Adından da anlaşılacağı üzere, pek de centilmen olmayan bir savaş biriminin hikayesini ele alan film tipik bir Guy Ritchie mottosu" +
+                    " olan \"adam biçe biçe ilerleme ve ne olursa olsun görevi tamamlama\" temasını layıkıyla yerine getiriyor.",
+                    ImageUrl = "Dairesi.jpg",
+					TrailerUrl="/Content/videos/Dairesi.mp4",
+					Genres =new List<Genre>(){ genres[0], genres[3] }
                 },
                 new Movie
                 {
-                    Title = "Film 5",
-                    Description = "açıklama 5",
-                    ImageUrl ="lord_of_the_rings.jpg",
-                    Genres =new List<Genre>(){ genres[2], genres[4] }
+                    Title = "Deadpool ve Wolverine",
+                    Description = "Deadpool ve Wolverine, büyük bir tehlikeye karşı Wolverine'i ikna ederek onunla birlikte savaşan Deadpool'un hikayesini konu ediyor. Wade Wilson’ın bir" +
+                    " paralı asker olarak geçirdiği günler ve Deadpool kimliği artık geride kalmıştır. O şimdi sivil hayatta varlık göstermek için çabalar. Wade, yeni hayatına alışmaya çalışırken," +
+                    " büyük bir tehlike ile karşı karşıya kalınca harekete geçmek zorunda kalır. Ancak bu tehlike ile tek başına baş etmesi zordur. Bu yüzden Wade en az kendisi kadar isteksiz olan" +
+                    " Wolverine'i yardım etmesi için ikna etmeye çalışır. ",
+                    ImageUrl ="Deadpool.jpeg",
+					TrailerUrl="/Content/videos/Deadpool.mp4",
+					Genres =new List<Genre>(){ genres[0], genres[1], genres[4] }
                 },
                 new Movie
                 {
-                    Title = "Film 6",
-                    Description = "açıklama 6",
-                    ImageUrl ="Titanic.jpg",
-                    Genres =new List<Genre>(){ genres[1], genres[2] }
-                }
-            };//film bilgisi
+                    Title = "Alien: Romulus",
+                    Description = "Alien: Romulus, kendilerini evrendeki en korkunç yaşam formuyla karşı karşıya bulan bir grup gencin yaşadıklarını konu ediyor. Uzay sömürgecileri Rain, Andy, Tyler," +
+                    " Kay, Bjorn ve Navarro, görünüşte tamamen terk edilmiş gibi gözüken bir uzay istasyonunda bir şeyler bulma umuduyla arama yapar. Ancak onların gerçekte neler olup bittiğine dair hiçbir" +
+                    " fikri yoktur. Çok geçmeden grup, dünyanın en korkutucu yaşam formu ile karşılaşacaktır. ",
+                    ImageUrl ="Alien.jpg",
+					TrailerUrl="/Content/videos/Alien.mp4",
+					Genres =new List<Genre>(){ genres[0], genres[3], genres[5] }
+                },
+				new Movie
+				{
+					Title = "Kaptan Pengu ve Arkadaşları 4: Buzuldaki Sır",
+					Description = "Kaptan Pengu ve Arkadaşları 4: Buzuldaki Sır, herkes tarafından dışlanan Tili'nin gizemli biriyle tanıştıktan sonra yaşadığı maceraları konu ediyor. Okyanus Melekleri Ormanı’nın" +
+                    " genel müdürü olan Tili, ormanı bir tatil köyü haline getirir ve böylece turistleri çekmeyi başarır. Bu sırada buzda meydana gelen bir çatlak yüzünden penguenlerin evleri zarar görünce, orman" +
+                    " sakinleri arasında tartışma başlar. Durumun ne olduğunu anlamak isteyen Kaptan Penguen ve arkadaşları bu amaçla kuzeye gelir. Ancak onlar geldiğinde Tili yoktur. Tüm gruplardan dışlanan Tili," +
+                    " yeryüzündeki kimsenin varlığından haberi olmadığı gizemli biriyle tanışmıştır. İkili, penguenler şehriyle, ormanı yeniden kurmak için uzun bir yolculuğa çıkarlar.  ",
+					ImageUrl ="Pengu.jpg",
+					TrailerUrl="/Content/videos/Pengu.mp4",
+					Genres =new List<Genre>(){ genres[4] }
+				},
+				new Movie
+				{
+					Title = "Cin Çukuru",
+					Description = "İki genç sevgilileriyle birlikte tatil yapmak ister ancak bunun için maddi durumları yeterli değildir. Bu durum üzerine arkadaşları Süleyman, onlara birlikte kamp yapmayı teklif eder." +
+                    " Yiyecekleri ve arabayı ayarlayacak olan Süleyman’ın tek isteği, kendisine de bir kız arkadaş ayarlamalarıdır. Teklifi kabul eden gençler, yaptıkları hazırlıkların ardından yola çıkarlar. Seçilen kamp yeri," +
+                    " Süleyman’ın anlattığının aksine, halk arasında Cin Çukuru olarak bilinen ve geçmişten gelen karanlık bir tılsımla lanetlenmiş bir bölgedir. Çok geçmeden gençler kendilerini tuhaf olayların içerisinde bulur. " +
+                    "Geçmişten gelen bir intikam hikayesi onları beklemektedir. ",
+					ImageUrl ="Cin.jpg",
+					TrailerUrl="/Content/videos/Cin.mp4",
+					Genres =new List<Genre>(){ genres[0], genres[5] }
+				}
+			};//film bilgisi
             var users = new List<User>()
             {
                 new User(){UserName="usera",Email="usera@gmail.com",Password="1234",ImageUrl="persona1,jpg"},

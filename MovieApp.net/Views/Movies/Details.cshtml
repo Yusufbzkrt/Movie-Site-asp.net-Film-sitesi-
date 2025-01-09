@@ -1,18 +1,44 @@
 ﻿@model Movie
 
-<div class="card">
-	<div class="row">
-		<div class="col-md-3">
-			<img src="/img/@Model.ImageUrl" class="card-img" />
-		</div>
-		<div class="col-md-9">
-			<div class="card-body">
-				<h5 class="card-title">@Model.Title</h5>
-				<p> @Html.Raw(Model.Description)</p>
-			
-			</div>
+@if (Model != null)
+{
+    <div class="card">
+        <div class="row">
+            <div class="col-md-3">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="/img/@Model.ImageUrl" class="card-img" />
+                }
+                else
+                {
+                    <p>Resim mevcut değil.</p>
+                }
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <p>@Html.Raw(Model.Description ?? "Açıklama mevcut değil.")</p>
+                    <div>
+                        @if (!string.IsNullOrEmpty(Model.TrailerUrl))
+                        {
+                            <h3>Fragmanı İzle</h3>
+                            <video width="600" controls>
+                                <source src="/Content/Videos/@Model.TrailerUrl" type="video/mp4">
+                                Tarayıcınız video oynatmayı desteklemiyor.
+                            </video>
+                        }
+                        else
+                        {
+                            <p>Fragman mevcut değil.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>Film bilgisi bulunamadı.</p>
+}
 
-		</div>
-
-	</div>
-</div>

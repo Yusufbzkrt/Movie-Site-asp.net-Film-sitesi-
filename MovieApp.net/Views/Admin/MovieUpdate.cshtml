@@ -16,13 +16,17 @@
 				<textarea asp-for="Description" name="Description" id="Description" class="form-control" value="@Model.Description"></textarea>
 				<span asp-validation-for="Description" class="text-danger"></span>
 			</div>
-			<div class="upload-container">
+
+			<div class="mb-3">
+				<label asp-for="Imageurl">Resim</label>
+				<input type="hidden" name="ImageUrl" value="@Model.Imageurl" />
 				<input type="file" name="file" class="form-control" />
 			</div>
-			<div class="mb-3">
-				<input type="hidden" name="ImageUrl" value="@Model.Imageurl"
-				<input type="file" name="file" class="form-control" />
 
+			<div class="mb-3">
+				<label asp-for="TrailerUrl">Fragman</label>
+				<input type="hidden" name="TrailerUrl" value="@Model.TrailerUrl" />
+				<input type="file" name="trailerFile" class="form-control" />
 			</div>
 			<button type="submit" class="btn btn-primary">Gönder</button>
 

@@ -19,13 +19,13 @@
 				<input type="file" name="file" class="form-control" />
 			</div>
 			<div class="mb-3">
-				<label asp-for="ReleaseDate"></label>
-				<input asp-for="ReleaseDate" class="form-control" />
-				<span asp-validation-for="ReleaseDate" class="text-danger"></span>
+				<label for="Trailer">Fragman Yükle</label>
+				<input type="file" name="Trailer" class="form-control" accept="video/*" />
+				<small class="text-muted">Yalnızca video dosyaları (MP4, AVI, vb.) yükleyin.</small>
 			</div>
 			<div class="mb-3">
-				<label asp-for="IsClassic"></label>
-				<input asp-for="IsClassic" type="checkbox" />
+				<label asp-for="IsClassic" for="IsClassic"> Is Classic</label>
+				<input asp-for="IsClassic" type="checkbox" id="IsClassic" />
 				<span asp-validation-for="IsClassic" class="text-danger"></span>
 			</div>
 			<button type="submit" class="btn btn-primary">Gönder</button>
