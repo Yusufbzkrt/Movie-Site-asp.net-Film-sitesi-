@@ -206,12 +206,11 @@ namespace MovieApp.net.Controllers
 		{
 			ViewBag.Genres = _context.Genres.ToList();
 
-			return View(new AdminCreateMovieModel());//ilk get isteği gönderilip sistem ayağı kalkmaya çalıştığı için modeli belirtmeliyiz
+			return View(new AdminCreateMovieModel());
 		}
 		[HttpPost]
 		public IActionResult MovieCreate(AdminCreateMovieModel model, int[] genreIds, IFormFile file, IFormFile Trailer)
 		{
-			
 				bool isClassic = model.IsClassic;
 				var entity = new Movie
 				{
@@ -231,7 +230,7 @@ namespace MovieApp.net.Controllers
 						file.CopyTo(stream);
 					}
 
-					entity.ImageUrl = fileName; // Yüklenen dosyanın adı veritabanına kaydedilecek
+					entity.ImageUrl = fileName; 
 				}
 				if (Trailer != null && Trailer.Length > 0)
 				{
@@ -243,7 +242,7 @@ namespace MovieApp.net.Controllers
 						Trailer.CopyTo(stream);
 					}
 
-					entity.TrailerUrl = $"/Content/Videos/{trailerFileName}"; // Fragmanın yolu veritabanına kaydedilecek
+					entity.TrailerUrl = trailerFileName;
 				}
 				foreach (int id in genreIds)
 				{

@@ -189,8 +189,3 @@ namespace MovieApp.net.Data
             }
     }
 }
-/*burda mssql kullandığımız zaman bir hata aldık burda id paramaetresini biz kendimiz
-gönderdiğimiz için hataya neden oldu bu yüzden bu kısımda mssql kullanıyorsak id parametrelerini silmeliyiz otomatik atar*/
- /*otomztik id ataması istemiyorsak ilgili özelliğin üzerine gelip
-  [Key,DatabaseGenerated(DatabaseGeneratedOption.None)] özelliği eklersek
- bütün objelerine kendimiz id girmek zorunda kalırız artık.*/

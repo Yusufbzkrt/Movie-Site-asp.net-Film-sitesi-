@@ -32,7 +32,7 @@ namespace MovieApp.Web.Controllers
             {
                 movies = movies
                     .Include(m => m.Genres)
-                    .Where(m => m.Genres.Any(g=>g.GenreId==id)); //tür bilgisinin id si ile yukarıdan gönderilen id eşit mi kontrolü yapılır
+                    .Where(m => m.Genres.Any(g=>g.GenreId==id));
             }
             if (!string.IsNullOrEmpty(q))
             {
@@ -53,6 +53,4 @@ namespace MovieApp.Web.Controllers
         }
     }
 }
-/*GET metodu formun görüntülenmesini sağlar, POST metodu ise formdan gelen veriyi işler. Bu nedenle, form işlemleri için hem GET hem de POST metotlarını
- * tanımlamak gerekir. Eğer sadece POST metodunu kullanmak istiyorsanız, formu render eden bir GET metoduna ihtiyacınız vardır.*/
 

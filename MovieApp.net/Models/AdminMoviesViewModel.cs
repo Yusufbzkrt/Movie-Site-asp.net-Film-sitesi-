@@ -26,9 +26,11 @@ namespace MovieApp.net.Models
 		public string Title { get; set; }
 		[Display(Name = "Film Açıklaması")]
 		[Required(ErrorMessage = "Film açıklaması girmelisiniz.")]
-		[StringLength(3500, MinimumLength = 10, ErrorMessage = "Film açıklaması için 10-3500 karakter girilmelidir.")]
+		[StringLength(3500, MinimumLength = 10,
+			ErrorMessage = "Film açıklaması için 10-3500 karakter girilmelidir.")]
 		public string Description { get; set; }
-		[Required(ErrorMessage = "En az bir tür seçmelisiniz")]
+        public string TraillerUrl { get; set; }
+        [Required(ErrorMessage = "En az bir tür seçmelisiniz")]
 		public int[] GenreIds { get; set; }
 
         public bool IsClassic { get; set; }//film klasik mi?

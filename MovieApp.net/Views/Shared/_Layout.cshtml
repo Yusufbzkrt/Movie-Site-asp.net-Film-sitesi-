@@ -17,7 +17,7 @@
 
     @await Html.PartialAsync("_navbar")
 
-    @RenderSection("header",false)<!-- layout içine yazarız fakat her sayfada görünmesini istemeyiz bunun için bu özelliği kullanırız. ilk parametre seçmek istediğimiz sayfa ikinci parametre ise bunun her sayfa için zorunlu olmadığını elirtmek için false yazdık. -->
+    @RenderSection("header",false)
     <div class="container mt-3">
         @if (IsSectionDefined("menu"))
         {
@@ -26,7 +26,7 @@
                     @RenderSection("menu",false)
                 </div>
                 <div class="col-md-9">
-                    @RenderBody() <!-- değişecek olan kısmı böyle belirtiriz. -->
+                    @RenderBody() 
                 </div>
             </div>
         }
@@ -47,13 +47,5 @@
     @RenderSection("script", required: false)
 </body>
 </html>
-<!--                 NOTLAR                                     -->
 
-<!--eğer farklı tasarımlı layoutlar kullanmak istiyorsak farklı bir layout sayfası oluştururuz ve burda nerde
-    değişişiklik yapılacaksa yapılır ardından
-@*@{
-           Layout = "_Layout2";
-      } *@
-  gibi bir kod bloğu değişik olmasını istediğimiz sayfaya aktarılır ve bu layout içerisindeki özellikleri kullanabilir.
--->
 

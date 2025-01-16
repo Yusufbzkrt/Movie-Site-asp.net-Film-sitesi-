@@ -2,7 +2,7 @@
 using MovieApp.net.Entity;
 
 namespace MovieApp.net.Data
-{   //ilgili nesneleri sınıfları buraya context olarak eklememiz gerekiyor
+{
     public class MovieContext : DbContext
     {
         public MovieContext(DbContextOptions<MovieContext> options) : base(options)
@@ -15,7 +15,6 @@ namespace MovieApp.net.Data
         public DbSet<Crew> Crews { get; set; }
         public DbSet<Cast> Casts { get; set; }
 
-        //aşağıda movie ve genre tablosunun özellikleri fluent api ile oluşturulmuştur.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>()
@@ -27,7 +26,3 @@ namespace MovieApp.net.Data
         }
     }
 }
-/*veritabanı güncellerken yapmamız gerekenler (powershellde veya buranın terminalinde yazabiliriz.);
-1-) bir şey ekleyeceksek "dotnet ef migrations add AddTableDirector"(AddTableDirector migrationunu ekle ankamına gelir
-- silme istersekte aynı şekilde"dotnet ef migrations add AddTableDirector")
-2-) "dotnet ef database update" diyip güncellemek gerekir*/

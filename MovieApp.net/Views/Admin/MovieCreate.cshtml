@@ -19,7 +19,7 @@
 				<input type="file" name="file" class="form-control" />
 			</div>
 			<div class="mb-3">
-				<label for="Trailer">Fragman Yükle</label>
+				<label asp-for="TraillerUrl"></label>
 				<input type="file" name="Trailer" class="form-control" accept="video/*" />
 				<small class="text-muted">Yalnızca video dosyaları (MP4, AVI, vb.) yükleyin.</small>
 			</div>
@@ -41,19 +41,17 @@
 					 name="GenreIds" 
 					 value="@item.GenreId" 
 					 id="genre_@(item.GenreId)"
-					@(Model.GenreIds != null && Model.GenreIds.Any(i => i  == item.GenreId) ? "checked" : "")>
-					<label class="form-check-label" for="genre_@(item.GenreId)">
+					@(Model.GenreIds != null && Model.GenreIds
+					.Any(i => i  == item.GenreId) ? "checked" : "")>
+					<label class="form-check-label" 
+					for="genre_@(item.GenreId)">
 						@item.Name
 					</label>
 				</div>
 			}
-			<span asp-validation-for="GenreIds" class="text-danger"></span>@*asp-validation-for="GenreIds" hangi property ile ilişkilendirmek istiyorsak onu yazıyoruz*@
+			<span asp-validation-for="GenreIds" class="text-danger"></span>
 			
 
 		</div>
 	</div>
 </form>
-@*<input class="form-check-input" type="checkbox" value="" id="genre_@(item.GenreId)" @(Model.SelectedGenres.Any(i=>i.GenreId == item.GenreId)? "checked": "")>
-burdaki yazdığımız kod bloğunda any fonksiyonunu kullandık bu metodun görevi, bir koleksiyonun herhangi bir öğesinin belirli bir koşulu sağlayıp sağlamadığını kontrol etmektir.
-bu kodda eğer sağlarsa checked deyimini kod bloğuna ekler.
-*@
